@@ -1,0 +1,37 @@
+{
+  "name": "react-material-fields",
+  "version": "0.1.0",
+  "description": "Smart material fields which can be easily validated",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublishOnly": "tsc -d",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdy1/react-forms.git"
+  },
+  "keywords": [
+    "React",
+    "material",
+    "form",
+    "validation",
+    "fields"
+  ],
+  "author": "강동윤 <kdy1997.dev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kdy1/react-forms/issues"
+  },
+  "homepage": "https://github.com/kdy1/react-forms#readme",
+  "devDependencies": {
+    "@types/react": "^16.9.23",
+    "jest": "^25.1.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.5",
+    "react-forms-base": "^0.1.0",
+    "react-valid-form": "^2.0.0"
+  }
+}
