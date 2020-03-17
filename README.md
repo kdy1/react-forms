@@ -58,3 +58,5 @@ const MyForm: React.FC = () => {
   );
 };
 ```
+
+![Validation of id](./validation.png)
