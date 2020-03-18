@@ -25,7 +25,6 @@ export const TextFormField: React.FC<TextFormFieldProps> = (
   const register = useCallback(
     (node: HTMLInputElement) => {
       reg.register(() => {
-        console.log(node.value);
         const e = props.validate(node.value);
         if (typeof e === "string") {
           setError(e);
