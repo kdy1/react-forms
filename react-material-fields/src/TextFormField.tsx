@@ -1,7 +1,7 @@
 import TextField from "@material-ui/core/TextField";
 import { TextFieldProps } from "@material-ui/core/TextField/TextField";
-import React, { useCallback, useState } from "react";
-import { useForm } from "react-forms-base";
+import React, { useCallback, useState, useEffect } from "react";
+import { useForm, Unregister } from "react-forms-base";
 
 export type TextFormFieldProps = TextFieldProps & {
   /**
@@ -21,10 +21,11 @@ export const TextFormField: React.FC<TextFormFieldProps> = (
 ) => {
   const [error, setError] = useState("");
   const reg = useForm();
+  let unregister: Unregister | undefined;
 
   const register = useCallback(
     (node: HTMLInputElement) => {
-      reg.register(() => {
+      unregister = reg.register(() => {
         if (!node) {
           return true;
         }
@@ -37,6 +38,18 @@ export const TextFormField: React.FC<TextFormFieldProps> = (
         }
         return !e;
       });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  useEffect(
+    () => {
+      return () => {
+        if (unregister) {
+          unregister();
+        }
+      };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
