@@ -4,11 +4,11 @@ import React, { createContext, useContext, useState } from "react";
  * Place to store validators.
  */
 export interface Registry {
-  register(validator: Validator): void;
+  register(validator: Validator): Unregister;
 }
 
 const def: Registry = {
-  register(validator: Validator): void {
+  register(validator: Validator): Unregister {
     throw new Error(
       "Validator registry is accessible only from children of `Form`"
     );
@@ -21,6 +21,10 @@ const FormContext = createContext(def);
  */
 export interface Validator {
   (): boolean;
+}
+
+export interface Unregister {
+  (): any;
 }
 
 interface Props {
@@ -64,8 +68,12 @@ export const Form: React.FC<Props> = (props: Props) => {
     <form onSubmit={submit}>
       <FormContext.Provider
         value={{
-          register(validator: Validator): void {
+          register(validator: Validator): Unregister {
             setValidators(vs => [validator, ...vs]);
+
+            return () => {
+              setValidators(vs => vs.filter(v => v !== validator));
+            };
           }
         }}
       >
