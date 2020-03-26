@@ -9,9 +9,13 @@ export interface Registry {
 
 const def: Registry = {
   register(validator: Validator): Unregister {
-    throw new Error(
-      "Validator registry is accessible only from children of `Form`"
-    );
+    if (console) {
+      console.error(
+        "Validator registry is accessible only from children of `Form`"
+      );
+    }
+
+    return () => {};
   }
 };
 const FormContext = createContext(def);
